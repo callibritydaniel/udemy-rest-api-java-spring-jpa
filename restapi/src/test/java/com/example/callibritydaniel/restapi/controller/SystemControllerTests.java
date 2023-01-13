@@ -20,6 +20,8 @@ public class SystemControllerTests {
     @Value(value="${local.server.port}")
     private int port;
 
+    private final String uri = "/api/system/name";
+
     @Autowired
     private TestRestTemplate restTemplate;
     @MockBean
@@ -30,13 +32,12 @@ public class SystemControllerTests {
         when(systemControllerMock.getAppName()).thenCallRealMethod();
         ReflectionTestUtils.setField(systemControllerMock, "appName", "Test App Name");
         String expect = "Test App Name";
-        String actual = restTemplate.getForObject("http://localhost:"+port+"/api/system/name", String.class);
+        String actual = restTemplate.getForObject("http://localhost:"+port+uri, String.class);
         assertEquals(expect, actual);
     }
 
     @Test
     public void testGetAppNameAPIMapping() {
-        String uri = "/api/system/name";
         restTemplate.getForObject("http://localhost:"+port+uri, String.class);
         verify(systemControllerMock).getAppName();
         verifyNoMoreInteractions(systemControllerMock);
