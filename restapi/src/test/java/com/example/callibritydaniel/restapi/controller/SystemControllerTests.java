@@ -30,7 +30,7 @@ public class SystemControllerTests {
     @Test
     public void testGetAppName() {
         SystemController c = new SystemController();
-        ReflectionTestUtils.setField(c, "appName", "Test App Name");
+        ReflectionTestUtils.setField(c, "appName", "Test App Name"); // this is cheating; how can I get the application context to load the properties into the controller instead?
         String expect = "Test App Name";
         String actual = c.getAppName();
         assertEquals(expect, actual);
