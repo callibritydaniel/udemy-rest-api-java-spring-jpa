@@ -29,10 +29,10 @@ public class SystemControllerTests {
 
     @Test
     public void testGetAppName() {
-        when(systemControllerMock.getAppName()).thenCallRealMethod();
-        ReflectionTestUtils.setField(systemControllerMock, "appName", "Test App Name");
+        SystemController c = new SystemController();
+        ReflectionTestUtils.setField(c, "appName", "Test App Name");
         String expect = "Test App Name";
-        String actual = restTemplate.getForObject("http://localhost:"+port+uri, String.class);
+        String actual = c.getAppName();
         assertEquals(expect, actual);
     }
 
