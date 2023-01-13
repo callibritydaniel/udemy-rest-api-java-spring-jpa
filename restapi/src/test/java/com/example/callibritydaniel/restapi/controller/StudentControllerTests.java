@@ -2,6 +2,7 @@ package com.example.callibritydaniel.restapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class StudentControllerTests {
     @Autowired
     private TestRestTemplate restTemplate;
     @MockBean
-    private StudentController mockController;
+    private StudentController studentControllerMock;
 
     @Test
     public void testGetStudent() {
@@ -30,12 +31,10 @@ public class StudentControllerTests {
 
     @Test
     public void testGetStudentAPIMapping() {
-        verifyMapping("/api/student/get");
-    }
-
-    private void verifyMapping(String mapping) {
+        String mapping = "/api/student/get";
         restTemplate.getForObject("http://localhost:"+port+mapping, String.class);
-        verify(mockController).getStudent();
+        verify(studentControllerMock).getStudent();
+        verifyNoMoreInteractions(studentControllerMock);
     }
     
 }
