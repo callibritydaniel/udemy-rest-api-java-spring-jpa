@@ -31,8 +31,8 @@ public class StudentControllerTests {
 
     @Test
     public void testGetStudentAPIMapping() {
-        String mapping = "/api/student/get";
-        restTemplate.getForObject("http://localhost:"+port+mapping, String.class);
+        String uri = "/api/student/get";
+        restTemplate.getForObject("http://localhost:"+port+uri, String.class);
         verify(studentControllerMock).getStudent();
         verifyNoMoreInteractions(studentControllerMock);
     }
